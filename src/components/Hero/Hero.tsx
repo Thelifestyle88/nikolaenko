@@ -65,9 +65,9 @@ export function Hero() {
 
           <motion.div
             className={styles.buttons}
-            initial={{ opacity: 0, y: 20 }}
-            animate={descDone ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={descDone ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5 }}
           >
             <Button href="#projects">
               {t('viewProjects')}
@@ -80,26 +80,22 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <motion.div
-          className={styles.photoWrapper}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
-        >
+        <div className={styles.photoWrapper}>
           <div className={styles.photoBorder}>
             <div className={styles.photoInner}>
               <Image
                 src="/images/avater.jpg"
                 alt={t('name')}
-                width={380}
-                height={380}
+                width={340}
+                height={340}
                 className={styles.photo}
                 priority
+                fetchPriority="high"
               />
             </div>
           </div>
           <div className={styles.photoGlow} />
-        </motion.div>
+        </div>
       </div>
 
       <motion.div

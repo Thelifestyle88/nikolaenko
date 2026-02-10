@@ -181,19 +181,22 @@ export function Typewriter({
     return () => clearTimeout(timeout);
   }, [humanize, started, displayed, done, onComplete]);
 
-  if (!started) {
-    return (
-      <Tag className={className}>
-        <span style={{ visibility: 'hidden' }}>{text}</span>
-      </Tag>
-    );
-  }
+  /* Остаток текста, который ещё не напечатан — невидим, но резервирует место (CLS fix) */
+  const remainder = text.slice(displayed.length);
 
   return (
     <Tag className={className}>
       {displayed}
+      {remainder && (
+        <span
+          style={{ visibility: 'hidden', pointerEvents: 'none', userSelect: 'none' }}
+          aria-hidden="true"
+        >
+          {remainder}
+        </span>
+      )}
       <AnimatePresence>
-        {showCursor && !done && (
+        {showCursor && !done && started && (
           <motion.span
             className={styles.cursor}
             initial={{ opacity: 1 }}
