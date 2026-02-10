@@ -1,0 +1,108 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contacts": "Contacts"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Nick Nikolaenko",
+    "role": "Frontend Developer",
+    "description": "3 years of commercial development experience. Specializing in React, TypeScript and high-load real-time systems.",
+    "viewProjects": "View Projects",
+    "downloadResume": "Download Resume"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Frontend developer with experience building complex enterprise applications from scratch. Working with real-time systems, optimizing performance, and contributing to architectural decisions.",
+    "techStack": "Tech Stack",
+    "softSkills": "Skills & Practices",
+    "codeReview": "Code Review",
+    "architecture": "Architectural Decisions",
+    "meetups": "Meetups & Conferences",
+    "mentoring": "Team Mentoring",
+    "optimization": "Performance Optimization",
+    "fromScratch": "Building Projects from Scratch"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Commercial Projects",
+    "team": "Team: {count} people",
+    "builtFromScratch": "Built from scratch",
+    "screenshots": "Screenshots",
+    "project1": {
+      "title": "Toll Booth Dispatcher Workstation",
+      "company": "PUSK LLC",
+      "location": "Eastern Exit from Ufa to M-5 \"Ural\" Highway",
+      "description": "Dispatcher workstation for toll booth operations. Real-time equipment monitoring (barriers, traffic lights, cameras), managing promotions and toll pricing.",
+      "highlights": "REST API for initial state, WebSocket (StompJS) for real-time updates, form validation via React-Hook-Form"
+    },
+    "project2": {
+      "title": "Contactless Toll Point Dispatcher Workstation",
+      "company": "PUSK LLC",
+      "location": "Vitebskaya Junction of Western High-Speed Diameter",
+      "description": "Monitoring system for contactless toll points. Real-time passage display, transaction merging with camera photos and transponder data.",
+      "highlights": "WebSocket via Socket.io for real-time passages, transaction merging via REST API"
+    },
+    "project3": {
+      "title": "ATMS Dispatcher Workstation",
+      "company": "PUSK LLC",
+      "location": "Vitebskaya Junction of Western High-Speed Diameter",
+      "description": "Automated Traffic Management System. Interactive map with equipment visualization via Canvas API.",
+      "highlights": "Improved LCP by 120%, INP by 135%. Canvas optimization, state caching, redraw throttling",
+      "achievement": "Performance Optimization"
+    },
+    "project4": {
+      "title": "BugBounty.ru Platform",
+      "company": "BugBounty.ru",
+      "location": "bugbounty.ru",
+      "description": "Landing page on Next.js and admin panel for bug hunters and companies. Full development cycle: desktop and mobile versions, error handling, modals, Markdown support.",
+      "highlights": "Next.js + TypeScript (landing), React + Redux Toolkit (admin panel), form validation via React-Hook-Form, security hardening, optimization with useMemo/memo/useCallback"
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "jobs": [
+      {
+        "company": "PUSK LLC",
+        "role": "Frontend Developer",
+        "period": "October 2025 — Present",
+        "description": "Expert company providing consulting services at all stages of construction projects — from concept to commissioning. Also develops software for toll road operations.",
+        "achievements": [
+          "Built 2 projects completely from scratch (Dispatcher Workstations)",
+          "Optimized performance: LCP +120%, INP +135%",
+          "Real-time data handling via WebSocket (StompJS, Socket.io)",
+          "Contributing to architectural decisions and code reviews",
+          "Regular participation in meetups and conferences"
+        ]
+      },
+      {
+        "company": "BugBounty.ru",
+        "role": "Frontend Developer",
+        "period": "August 2024 — October 2025 (1 year 3 months)",
+        "description": "Vulnerability discovery platform — connecting companies and bug hunters to improve cybersecurity.",
+        "achievements": [
+          "Built landing page with Next.js + TypeScript (desktop + mobile)",
+          "Built admin panel for bug hunter and company dashboards",
+          "Implemented error handling, modals, form validation",
+          "Implemented Markdown support",
+          "Designed and implemented security measures against attacks"
+        ]
+      }
+    ]
+  },
+  "contacts": {
+    "title": "Contacts",
+    "subtitle": "Get in touch",
+    "email": "Email",
+    "telegram": "Telegram",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "downloadResume": "Download Resume (PDF)"
+  },
+  "footer": {
+    "copyright": "© {year} All rights reserved",
+    "builtWith": "Built with Next.js and TypeScript"
+  }
+}
