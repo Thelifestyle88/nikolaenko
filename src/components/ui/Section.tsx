@@ -1,7 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { ReactNode, useRef, useEffect, useState } from 'react';
 import styles from './Section.module.css';
 
 type SectionProps = {
@@ -12,16 +11,34 @@ type SectionProps = {
 };
 
 export function Section({ id, children, className, alternate }: SectionProps) {
+  const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '-60px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <motion.section
+    <section
+      ref={ref}
       id={id}
-      className={`${styles.section} ${alternate ? styles.alternate : ''} ${className || ''}`}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`${styles.section} ${alternate ? styles.alternate : ''} ${visible ? styles.visible : ''} ${className || ''}`}
     >
       <div className={styles.container}>{children}</div>
-    </motion.section>
+    </section>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FiArrowDown, FiDownload } from 'react-icons/fi';
 import { Button } from '@/components/ui/Button';
@@ -59,16 +58,10 @@ export function Hero() {
             humanize
             className={styles.description}
             as="p"
-            showCursor
             onComplete={onDescComplete}
           />
 
-          <motion.div
-            className={styles.buttons}
-            initial={{ opacity: 0 }}
-            animate={descDone ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className={`${styles.buttons} ${descDone ? styles.buttonsVisible : ''}`}>
             <Button href="#projects">
               {t('viewProjects')}
               <FiArrowDown />
@@ -77,7 +70,7 @@ export function Hero() {
               {t('downloadResume')}
               <FiDownload />
             </Button>
-          </motion.div>
+          </div>
         </div>
 
         <div className={styles.photoWrapper}>
@@ -98,19 +91,13 @@ export function Hero() {
         </div>
       </div>
 
-      <motion.div
-        className={styles.scrollIndicator}
-        initial={{ opacity: 0 }}
-        animate={descDone ? { opacity: 1 } : {}}
-        transition={{ delay: 0.5, duration: 0.6 }}
+      <div
+        className={`${styles.scrollIndicator} ${descDone ? styles.scrollIndicatorVisible : ''}`}
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-        >
+        <div className={styles.scrollIndicatorBounce}>
           <FiArrowDown size={20} />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { FiUsers, FiZap, FiCode, FiImage, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Section } from '@/components/ui/Section';
@@ -182,13 +182,10 @@ export function Projects() {
 
       <div className={styles.grid}>
         {projects.map((project, index) => (
-          <motion.div
+          <div
             key={project.key}
             className={styles.card}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.15, duration: 0.5 }}
+            style={{ '--i': index } as React.CSSProperties}
           >
             <div className={styles.cardHeader}>
               <h3 className={styles.cardTitle}>
@@ -268,7 +265,7 @@ export function Projects() {
                 </div>
               )}
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 

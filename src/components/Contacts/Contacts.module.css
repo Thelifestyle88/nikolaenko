@@ -15,8 +15,19 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   text-decoration: none;
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
   text-align: center;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: contactFadeIn 0.35s ease both;
+  animation-delay: calc(var(--i, 0) * 0.08s);
+}
+
+@keyframes contactFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card:hover {
