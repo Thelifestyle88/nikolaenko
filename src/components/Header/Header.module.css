@@ -22,14 +22,14 @@
   max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--space-container);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
   font-weight: 700;
   font-family: var(--font-mono);
   text-decoration: none;
@@ -43,16 +43,17 @@
 
 .nav {
   display: flex;
-  gap: 32px;
+  gap: clamp(16px, 2vw + 4px, 32px);
 }
 
 .navLink {
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
   transition: color var(--transition);
   position: relative;
+  white-space: nowrap;
 }
 
 .navLink::after {
@@ -77,14 +78,14 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: clamp(8px, 1vw, 12px);
 }
 
 .langToggle {
   padding: 6px 12px;
   border-radius: var(--radius-sm);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: var(--fs-xs);
   color: var(--accent);
   border: 1.5px solid var(--accent);
   transition: all var(--transition);
@@ -124,14 +125,14 @@
   display: none;
 }
 
-/* ===== Mobile ===== */
-@media (max-width: 768px) {
+/* ===== Tablet: скрываем навигацию, показываем бургер ===== */
+@media (max-width: 1024px) {
   .nav {
     position: fixed;
     top: var(--header-height);
     right: -100%;
-    width: 70%;
-    max-width: 300px;
+    width: 60%;
+    max-width: 320px;
     height: calc(100vh - var(--header-height));
     background: var(--bg-primary);
     flex-direction: column;
@@ -147,8 +148,8 @@
   }
 
   .navLink {
-    padding: 16px 32px;
-    font-size: 1.1rem;
+    padding: 14px 28px;
+    font-size: var(--fs-body);
   }
 
   .navLink::after {
@@ -166,5 +167,16 @@
     top: var(--header-height);
     background: rgba(0, 0, 0, 0.4);
     z-index: 98;
+  }
+}
+
+/* ===== Mobile: меню на всю ширину ===== */
+@media (max-width: 480px) {
+  .nav {
+    width: 80%;
+  }
+
+  .navLink {
+    padding: 16px 24px;
   }
 }

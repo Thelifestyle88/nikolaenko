@@ -46,6 +46,17 @@ export function Header() {
     };
   }, [menuOpen]);
 
+  /* Закрываем бургер-меню при ресайзе на десктоп */
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024 && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [menuOpen]);
+
   const currentLocale = pathname.startsWith('/en') ? 'en' : 'ru';
   const toggleLocale = () => {
     const newLocale = currentLocale === 'ru' ? 'en' : 'ru';

@@ -2,10 +2,10 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: clamp(10px, 1.2vw + 4px, 14px) clamp(20px, 2vw + 8px, 28px);
   border-radius: var(--radius-md);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: var(--fs-body);
   transition: all var(--transition);
   text-decoration: none;
   cursor: pointer;
@@ -31,11 +31,4 @@
 .outline:hover {
   background: var(--accent-light);
   transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .button {
-    padding: 12px 24px;
-    font-size: 0.9rem;
-  }
 }
