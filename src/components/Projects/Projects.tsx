@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslations } from 'next-intl';
-import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { FiUsers, FiZap, FiCode, FiImage, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Section } from '@/components/ui/Section';
@@ -116,25 +116,29 @@ export function Projects() {
     });
   }, []);
 
-  /* Блокировка скролла при открытом лайтбоксе */
+  /* Блокировка скролла при открытом лайтбоксе (зависит только от open/close, не от index) */
+  const isLightboxOpen = lightbox !== null;
+  const scrollYRef = useRef(0);
+
   useEffect(() => {
-    if (lightbox) {
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.left = '';
-        document.body.style.right = '';
-        document.body.style.overflow = '';
-        window.scrollTo(0, scrollY);
-      };
-    }
-  }, [lightbox]);
+    if (!isLightboxOpen) return;
+
+    scrollYRef.current = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollYRef.current}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollYRef.current);
+    };
+  }, [isLightboxOpen]);
 
   /* Клавиатурная навигация */
   useEffect(() => {
@@ -269,64 +273,55 @@ export function Projects() {
         ))}
       </div>
 
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            className={styles.lightbox}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeLightbox}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+      {/* Lightbox — через portal в body, чтобы position:fixed работал от viewport */}
+      {lightbox && createPortal(
+        <div
+          className={styles.lightbox}
+          onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <button className={styles.lightboxClose} onClick={closeLightbox} aria-label="Close">
+            <FiX size={28} />
+          </button>
+
+          <button
+            className={`${styles.lightboxArrow} ${styles.lightboxArrowLeft}`}
+            onClick={(e) => { e.stopPropagation(); goPrev(); }}
+            aria-label="Previous"
           >
-            <button className={styles.lightboxClose} onClick={closeLightbox} aria-label="Close">
-              <FiX size={28} />
-            </button>
+            <FiChevronLeft size={32} />
+          </button>
 
-            <button
-              className={`${styles.lightboxArrow} ${styles.lightboxArrowLeft}`}
-              onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              aria-label="Previous"
-            >
-              <FiChevronLeft size={32} />
-            </button>
+          <div
+            className={styles.lightboxContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={lightbox.images[lightbox.index]}
+              alt={`Screenshot ${lightbox.index + 1}`}
+              width={1200}
+              height={800}
+              className={styles.lightboxImg}
+            />
+            <p className={styles.lightboxCounter}>
+              {lightbox.index + 1} / {lightbox.images.length}
+            </p>
+            <p className={styles.lightboxSwipeHint}>
+              ← swipe →
+            </p>
+          </div>
 
-            <motion.div
-              key={lightbox.index}
-              className={styles.lightboxContent}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.2 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={lightbox.images[lightbox.index]}
-                alt={`Screenshot ${lightbox.index + 1}`}
-                width={1200}
-                height={800}
-                className={styles.lightboxImg}
-              />
-              <p className={styles.lightboxCounter}>
-                {lightbox.index + 1} / {lightbox.images.length}
-              </p>
-              <p className={styles.lightboxSwipeHint}>
-                ← swipe →
-              </p>
-            </motion.div>
-
-            <button
-              className={`${styles.lightboxArrow} ${styles.lightboxArrowRight}`}
-              onClick={(e) => { e.stopPropagation(); goNext(); }}
-              aria-label="Next"
-            >
-              <FiChevronRight size={32} />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <button
+            className={`${styles.lightboxArrow} ${styles.lightboxArrowRight}`}
+            onClick={(e) => { e.stopPropagation(); goNext(); }}
+            aria-label="Next"
+          >
+            <FiChevronRight size={32} />
+          </button>
+        </div>,
+        document.body
+      )}
     </Section>
   );
 }
