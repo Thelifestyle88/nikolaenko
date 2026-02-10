@@ -192,18 +192,21 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .lightboxClose {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   color: white;
   opacity: 0.7;
   transition: opacity var(--transition);
@@ -224,18 +227,21 @@
   transition: opacity var(--transition);
   z-index: 201;
   padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
 }
 
 .lightboxArrow:hover {
   opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .lightboxArrowLeft {
-  left: 16px;
+  left: 12px;
 }
 
 .lightboxArrowRight {
-  right: 16px;
+  right: 12px;
 }
 
 .lightboxContent {
@@ -245,21 +251,27 @@
   gap: 12px;
   max-width: 90vw;
   max-height: 85vh;
+  pointer-events: none;
 }
 
 .lightboxImg {
   max-width: 90vw;
-  max-height: 80vh;
+  max-height: 75vh;
   width: auto;
   height: auto;
   object-fit: contain;
   border-radius: var(--radius-md);
+  pointer-events: auto;
 }
 
 .lightboxCounter {
   color: rgba(255, 255, 255, 0.6);
   font-size: var(--fs-small);
   font-family: var(--font-mono);
+}
+
+.lightboxSwipeHint {
+  display: none;
 }
 
 /* ===== Tablet ===== */
@@ -276,6 +288,36 @@
   }
 
   .lightboxArrow {
-    display: none;
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    padding: 10px;
   }
+
+  .lightboxArrowLeft {
+    left: calc(50% - 60px);
+  }
+
+  .lightboxArrowRight {
+    right: calc(50% - 60px);
+  }
+
+  .lightboxImg {
+    max-height: 65vh;
+  }
+
+  .lightboxSwipeHint {
+    display: block;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: var(--fs-xs);
+    font-family: var(--font-mono);
+    animation: fadeInOut 3s ease forwards;
+  }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
 }

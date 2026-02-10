@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { FiMail, FiSend, FiGithub, FiLinkedin, FiDownload } from 'react-icons/fi';
 import { Section } from '@/components/ui/Section';
@@ -37,6 +37,8 @@ const contactLinks = [
 
 export function Contacts() {
   const t = useTranslations('contacts');
+  const locale = useLocale();
+  const resumeFile = locale === 'en' ? '/resume-en.pdf' : '/resume-ru.pdf';
 
   return (
     <Section id="contacts">
@@ -70,7 +72,7 @@ export function Contacts() {
         viewport={{ once: true }}
         transition={{ delay: 0.4, duration: 0.5 }}
       >
-        <Button href="/resume-ru.pdf" download>
+        <Button href={resumeFile} download>
           <FiDownload />
           {t('downloadResume')}
         </Button>

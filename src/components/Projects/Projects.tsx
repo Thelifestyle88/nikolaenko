@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -93,26 +93,87 @@ export function Projects() {
   const t = useTranslations('projects');
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
   const openLightbox = (images: string[], index: number) => {
     setLightbox({ images, index });
   };
 
-  const closeLightbox = () => setLightbox(null);
+  const closeLightbox = useCallback(() => setLightbox(null), []);
 
-  const goNext = () => {
-    if (!lightbox) return;
-    setLightbox({
-      ...lightbox,
-      index: (lightbox.index + 1) % lightbox.images.length,
+  const goNext = useCallback(() => {
+    setLightbox((prev) => {
+      if (!prev) return null;
+      return { ...prev, index: (prev.index + 1) % prev.images.length };
     });
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setLightbox((prev) => {
+      if (!prev) return null;
+      return { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length };
+    });
+  }, []);
+
+  /* Блокировка скролла при открытом лайтбоксе */
+  useEffect(() => {
+    if (lightbox) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [lightbox]);
+
+  /* Клавиатурная навигация */
+  useEffect(() => {
+    if (!lightbox) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightbox, closeLightbox, goNext, goPrev]);
+
+  /* Обработка тач-свайпов */
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
-  const goPrev = () => {
-    if (!lightbox) return;
-    setLightbox({
-      ...lightbox,
-      index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length,
-    });
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    /* Свайп горизонтальный и достаточно длинный */
+    if (absDx > 40 && absDx > absDy * 1.2) {
+      if (dx < 0) goNext();
+      else goPrev();
+    }
+
+    /* Свайп вниз — закрыть */
+    if (absDy > 80 && absDy > absDx * 1.5 && dy > 0) {
+      closeLightbox();
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   return (
@@ -220,6 +281,8 @@ export function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeLightbox}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             <button className={styles.lightboxClose} onClick={closeLightbox} aria-label="Close">
               <FiX size={28} />
@@ -236,9 +299,9 @@ export function Projects() {
             <motion.div
               key={lightbox.index}
               className={styles.lightboxContent}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -251,6 +314,9 @@ export function Projects() {
               />
               <p className={styles.lightboxCounter}>
                 {lightbox.index + 1} / {lightbox.images.length}
+              </p>
+              <p className={styles.lightboxSwipeHint}>
+                ← swipe →
               </p>
             </motion.div>
 
