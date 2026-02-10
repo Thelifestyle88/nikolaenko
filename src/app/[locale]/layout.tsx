@@ -3,6 +3,8 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
+import { YandexMetrika } from '@/components/ui/YandexMetrika';
+import { Suspense } from 'react';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 
 const inter = Inter({
@@ -41,6 +43,9 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
+        <Suspense fallback={null}>
+          <YandexMetrika />
+        </Suspense>
       </body>
     </html>
   );
