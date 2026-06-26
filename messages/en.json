@@ -9,7 +9,7 @@
     "greeting": "Hi, I'm",
     "name": "Nick Nikolaenko",
     "role": "Frontend Developer",
-    "description": "3 years of commercial development experience. Specializing in React, TypeScript and high-load real-time systems.",
+    "description": "4+ years in frontend development, including 3+ years of commercial experience. Specializing in React, TypeScript and high-load real-time systems.",
     "viewProjects": "View Projects",
     "downloadResume": "Download Resume"
   },
@@ -67,7 +67,7 @@
       {
         "company": "PUSK LLC",
         "role": "Frontend Developer",
-        "period": "October 2023 — Present",
+        "period": "Feb 2023 — Present",
         "description": "Expert company providing consulting services at all stages of construction projects — from concept to commissioning. Also develops software for toll road operations.",
         "achievements": [
           "Built 2 projects completely from scratch (Dispatcher Workstations)",
