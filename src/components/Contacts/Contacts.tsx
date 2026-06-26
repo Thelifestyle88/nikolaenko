@@ -37,7 +37,10 @@ const contactLinks = [
 export function Contacts() {
   const t = useTranslations('contacts');
   const locale = useLocale();
-  const resumeFile = locale === 'en' ? '/resume-en.pdf' : '/resume-ru.pdf';
+  const resumeFile =
+    locale === 'en'
+      ? '/Nick_Nikolaenko_Frontend_Developer_CV_updated.docx'
+      : '/resume-ru.pdf';
 
   return (
     <Section id="contacts">

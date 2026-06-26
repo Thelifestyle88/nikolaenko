@@ -99,7 +99,7 @@
     "telegram": "Telegram",
     "github": "GitHub",
     "linkedin": "LinkedIn",
-    "downloadResume": "Download Resume (PDF)"
+    "downloadResume": "Download Resume"
   },
   "footer": {
     "copyright": "© {year} All rights reserved",

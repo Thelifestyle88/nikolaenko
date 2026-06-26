@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { FiArrowDown, FiDownload } from 'react-icons/fi';
 import { Button } from '@/components/ui/Button';
@@ -10,6 +10,11 @@ import styles from './Hero.module.css';
 
 export function Hero() {
   const t = useTranslations('hero');
+  const locale = useLocale();
+  const resumeFile =
+    locale === 'en'
+      ? '/Nick_Nikolaenko_Frontend_Developer_CV_updated.docx'
+      : '/resume-ru.pdf';
   const [greetingDone, setGreetingDone] = useState(false);
   const [nameDone, setNameDone] = useState(false);
   const [roleDone, setRoleDone] = useState(false);
@@ -66,7 +71,7 @@ export function Hero() {
               {t('viewProjects')}
               <FiArrowDown />
             </Button>
-            <Button variant="outline" href="/resume-ru.pdf" download>
+            <Button variant="outline" href={resumeFile} download>
               {t('downloadResume')}
               <FiDownload />
             </Button>
