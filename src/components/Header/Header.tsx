@@ -75,10 +75,21 @@ export function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <a href={`/${currentLocale}`} className={styles.logo}>
-          <span className={styles.logoAccent}>{'<'}</span>
-          Dev
-          <span className={styles.logoAccent}>{'/>'}</span>
+        <a href={`/${currentLocale}`} className={styles.logo} aria-label="Nick Nikolaenko">
+          <img
+            src="/images/nick_logo_only_transparent.svg"
+            alt=""
+            className={`${styles.logoImage} ${styles.logoLight}`}
+            width={44}
+            height={44}
+          />
+          <img
+             src="/images/nick_logo_only_transparent.svg"
+            alt=""
+            className={`${styles.logoImage} ${styles.logoDark}`}
+            width={44}
+            height={44}
+          />
         </a>
 
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>

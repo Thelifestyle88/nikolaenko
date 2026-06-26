@@ -29,16 +29,37 @@
 }
 
 .logo {
-  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
-  font-weight: 700;
-  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: var(--text-primary);
-  transition: color var(--transition);
+  transition: opacity var(--transition);
 }
 
-.logoAccent {
-  color: var(--accent);
+.logo:hover {
+  opacity: 0.85;
+}
+
+.logoImage {
+  display: block;
+  height: clamp(32px, 2vw + 20px, 44px);
+  width: clamp(32px, 2vw + 20px, 44px);
+  object-fit: contain;
+}
+
+.logoLight {
+  display: none;
+}
+
+.logoDark {
+  display: block;
+}
+
+:global([data-theme='light']) .logoLight {
+  display: block;
+}
+
+:global([data-theme='light']) .logoDark {
+  display: none;
 }
 
 .nav {
