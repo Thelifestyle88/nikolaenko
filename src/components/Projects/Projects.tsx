@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { FiUsers, FiZap, FiCode, FiImage, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Section } from '@/components/ui/Section';
@@ -20,6 +20,15 @@ type ProjectData = {
 };
 
 const SCREENSHOT_SLOTS = 3;
+
+const CARD_SECTIONS = [
+  'header',
+  'description',
+  'screenshots',
+  'highlights',
+  'tech',
+  'meta',
+] as const;
 
 const projects: ProjectData[] = [
   {
@@ -113,10 +122,71 @@ const projects: ProjectData[] = [
 
 export function Projects() {
   const t = useTranslations('projects');
+  const locale = useLocale();
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
+  const gridRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
+
+  const equalizeCardSections = useCallback(() => {
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (cards.length === 0) return;
+
+    cards.forEach((card) => {
+      CARD_SECTIONS.forEach((section) => {
+        const el = card.querySelector<HTMLElement>(`[data-card-section="${section}"]`);
+        if (el) el.style.minHeight = '';
+      });
+    });
+
+    const rows: HTMLDivElement[][] = [];
+    cards.forEach((card) => {
+      const top = card.offsetTop;
+      const row = rows.find((items) => Math.abs(items[0].offsetTop - top) < 8);
+      if (row) row.push(card);
+      else rows.push([card]);
+    });
+
+    rows.forEach((row) => {
+      const maxHeights = CARD_SECTIONS.map((section) => {
+        const elements = row
+          .map((card) => card.querySelector<HTMLElement>(`[data-card-section="${section}"]`))
+          .filter(Boolean) as HTMLElement[];
+
+        return Math.max(...elements.map((el) => el.getBoundingClientRect().height), 0);
+      });
+
+      CARD_SECTIONS.forEach((section, sectionIndex) => {
+        const elements = row
+          .map((card) => card.querySelector<HTMLElement>(`[data-card-section="${section}"]`))
+          .filter(Boolean) as HTMLElement[];
+
+        elements.forEach((el) => {
+          el.style.minHeight = `${maxHeights[sectionIndex]}px`;
+        });
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    const run = () => requestAnimationFrame(equalizeCardSections);
+    run();
+
+    const timeoutId = window.setTimeout(run, 700);
+    window.addEventListener('resize', run);
+
+    const grid = gridRef.current;
+    const resizeObserver = grid ? new ResizeObserver(run) : null;
+    resizeObserver?.observe(grid!);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener('resize', run);
+      resizeObserver?.disconnect();
+    };
+  }, [equalizeCardSections, locale]);
 
   const openLightbox = (images: string[], index: number) => {
     setLightbox({ images, index });
@@ -206,14 +276,17 @@ export function Projects() {
     <Section id="projects">
       <SectionTitle title={t('title')} subtitle={t('subtitle')} />
 
-      <div className={styles.grid}>
+      <div className={styles.grid} ref={gridRef}>
         {projects.map((project, index) => (
           <div
             key={project.key}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
             className={styles.card}
             style={{ '--i': index } as React.CSSProperties}
           >
-            <div className={styles.cardHeader}>
+            <div className={styles.cardHeader} data-card-section="header">
               <h3 className={styles.cardTitle}>
                 {t(`${project.key}.title`)}
               </h3>
@@ -225,11 +298,11 @@ export function Projects() {
               </div>
             </div>
 
-            <p className={styles.cardDescription}>
+            <p className={styles.cardDescription} data-card-section="description">
               {t(`${project.key}.description`)}
             </p>
 
-            <div className={styles.screenshotsSection}>
+            <div className={styles.screenshotsSection} data-card-section="screenshots">
               <p className={styles.screenshotsLabel}>
                 <FiImage size={14} />
                 {t('screenshots')}
@@ -271,14 +344,14 @@ export function Projects() {
               </div>
             </div>
 
-            <div className={styles.highlights}>
+            <div className={styles.highlights} data-card-section="highlights">
               <FiCode className={styles.highlightIcon} />
               <p className={styles.highlightText}>
                 {t(`${project.key}.highlights`)}
               </p>
             </div>
 
-            <div className={styles.techStack}>
+            <div className={styles.techStack} data-card-section="tech">
               {project.techStack.map((tech) => (
                 <span key={tech} className={styles.techBadge}>
                   {tech}
@@ -286,7 +359,7 @@ export function Projects() {
               ))}
             </div>
 
-            <div className={styles.meta}>
+            <div className={styles.meta} data-card-section="meta">
               {project.teamSize && (
                 <div className={styles.metaItem}>
                   <FiUsers size={16} />
