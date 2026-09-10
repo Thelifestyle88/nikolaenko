@@ -198,12 +198,14 @@
   max-width: 100%;
 }
 
-.techStack {
+.card [data-card-section='tech'] {
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  text-align: left;
   gap: 8px;
-  justify-content: center;
-  align-content: center;
 }
 
 .techBadge {
