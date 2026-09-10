@@ -1,16 +1,42 @@
-# Portfolio — Frontend Developer
+# Nick Nikolaenko — Portfolio
 
-Сайт-визитка на **Next.js 15 + TypeScript + CSS Modules**.
+Личный сайт-визитка frontend-разработчика на **Next.js 16 + TypeScript + CSS Modules**.
+
+Двуязычная версия (RU/EN) с тёмной и светлой темой. Контент синхронизирован с резюме: опыт, даты, контакты.
+
+## Что на сайте
+
+- **Hero** — приветствие с typewriter-анимацией, фото, кнопки «Смотреть проекты» и «Скачать резюме»
+- **About** — стек технологий и навыки (код-ревью, архитектура, оптимизация и др.)
+- **Projects** — коммерческие проекты с описанием, скриншотами и lightbox-галереей:
+  - PUSK LLC — АРМ диспетчера (3 проекта: пропускной пункт, бесконтактные пункты, АСУДД)
+  - BugBounty.ru — лендинг и админ-панель
+- **Experience** — опыт работы (PUSK LLC, BugBounty.ru)
+- **Contacts** — email, Telegram, GitHub, LinkedIn, скачивание резюме
+- **Header** — навигация, переключатели языка и темы, логотип
+- **Footer** — соцсети и копирайт
 
 ## Стек
 
-- **Next.js** (App Router, SSR)
+- **Next.js 16** (App Router)
 - **TypeScript**
 - **CSS Modules**
-- **next-intl** — интернационализация (RU/EN)
-- **next-themes** — переключатель тем (светлая/тёмная)
+- **next-intl** — локализация RU/EN
+- **next-themes** — светлая/тёмная тема
 - **framer-motion** — анимации
 - **react-icons** — иконки
+
+## Контент и ассеты
+
+| Что | Где |
+|-----|-----|
+| Тексты RU/EN | `messages/ru.json`, `messages/en.json` |
+| Контакты | `src/components/Contacts/Contacts.tsx`, `src/components/Footer/Footer.tsx` |
+| Резюме EN | `public/Nick_Nikolaenko_Frontend_Developer_CV_updated.docx` |
+| Резюме RU | `public/resume-ru.pdf` |
+| Логотип в header | `public/images/nick_logo_only_transparent.svg` |
+| Favicon / PWA-иконки | `public/icons/` (из пака `public/nick_logo_site_icons/`) |
+| Фото, скриншоты проектов | `public/images/` |
 
 ## Локальная разработка
 
@@ -23,37 +49,11 @@ npm run dev
 
 ## Деплой на Vercel
 
-### Шаг 1: Создать GitHub-репозиторий
+1. Запушить репозиторий на GitHub
+2. На [vercel.com](https://vercel.com) подключить репозиторий — Vercel определит Next.js автоматически
+3. При необходимости добавить свой домен в **Settings → Domains**
 
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
-
-### Шаг 2: Подключить Vercel
-
-1. Зайти на [vercel.com](https://vercel.com) и авторизоваться через GitHub
-2. Нажать **"Add New Project"**
-3. Выбрать ваш репозиторий
-4. Vercel автоматически определит Next.js — просто нажать **"Deploy"**
-5. Через 1-2 минуты сайт будет доступен по адресу `your-project.vercel.app`
-
-### Шаг 3: Подключить свой домен
-
-1. В настройках проекта на Vercel перейти в **Settings → Domains**
-2. Добавить свой домен (например, `yourname.dev`)
-3. Vercel покажет DNS-записи, которые нужно прописать у регистратора домена:
-   - **A-запись**: `76.76.21.21`
-   - Или **CNAME**: `cname.vercel-dns.com`
-4. SSL-сертификат выдаётся автоматически
-
-### CI/CD
-
-Каждый `git push` в ветку `main` автоматически запускает новый деплой.
-Pull Request'ы получают отдельный preview-URL для тестирования.
+Каждый push в `main` запускает деплой. Pull Request'ы получают preview-URL.
 
 ## Структура проекта
 
@@ -61,29 +61,26 @@ Pull Request'ы получают отдельный preview-URL для тест�
 src/
 ├── app/
 │   ├── [locale]/        # страницы с локализацией
-│   │   ├── layout.tsx   # layout с провайдерами
+│   │   ├── layout.tsx   # layout, шрифты, Yandex Metrika
 │   │   └── page.tsx     # главная страница
-│   ├── layout.tsx       # root layout
-│   └── globals.css      # глобальные стили и CSS-переменные
+│   ├── layout.tsx       # metadata, favicon, web manifest
+│   └── globals.css      # CSS-переменные и темы
 ├── components/
-│   ├── Header/          # навигация + переключатели
+│   ├── Header/          # навигация, логотип, RU/EN, тема
 │   ├── Hero/            # главный экран
-│   ├── About/           # стек технологий
-│   ├── Projects/        # проекты
+│   ├── About/           # стек и навыки
+│   ├── Projects/        # проекты и галерея
 │   ├── Experience/      # опыт работы
-│   ├── Contacts/        # контакты
-│   ├── Footer/          # подвал
-│   └── ui/              # переиспользуемые компоненты
-├── i18n/                # конфигурация локализации
-└── middleware.ts        # middleware для i18n
+│   ├── Contacts/        # контакты и резюме
+│   ├── Footer/
+│   └── ui/              # Button, Section, Typewriter, ThemeProvider и др.
+├── i18n/
+└── middleware.ts
 messages/
-├── ru.json              # переводы RU
-└── en.json              # переводы EN
+├── ru.json
+└── en.json
+public/
+├── icons/               # favicon, apple-touch, PWA
+├── images/              # фото, логотип, скриншоты
+└── nick_logo_site_icons/ # исходный пак иконок
 ```
-
-## Кастомизация
-
-- **Имя и контакты**: замените заглушки в `messages/ru.json` и `messages/en.json`
-- **Ссылки соцсетей**: обновите в `src/components/Contacts/Contacts.tsx` и `src/components/Footer/Footer.tsx`
-- **Резюме**: добавьте файлы `public/resume-ru.pdf` и `public/resume-en.pdf`
-- **Фото**: добавьте изображения в `public/images/`
