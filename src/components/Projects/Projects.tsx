@@ -22,7 +22,8 @@ type ProjectData = {
 const SCREENSHOT_SLOTS = 3;
 
 const CARD_SECTIONS = [
-  'header',
+  'title',
+  'subheader',
   'description',
   'screenshots',
   'highlights',
@@ -286,11 +287,11 @@ export function Projects() {
             className={styles.card}
             style={{ '--i': index } as React.CSSProperties}
           >
-            <div className={styles.cardHeader} data-card-section="header">
-              <h3 className={styles.cardTitle}>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle} data-card-section="title">
                 {t(`${project.key}.title`)}
               </h3>
-              <div className={styles.cardSubheader}>
+              <div className={styles.cardSubheader} data-card-section="subheader">
                 <span className={styles.companyBadge}>
                   {t(`${project.key}.company`)}
                 </span>
