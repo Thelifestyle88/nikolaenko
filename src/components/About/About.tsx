@@ -18,7 +18,7 @@ import {
   FiUsers,
   FiZap,
   FiPackage,
-  FiMic,
+  FiCpu,
 } from 'react-icons/fi';
 import { Section } from '@/components/ui/Section';
 import { SectionTitle } from '@/components/ui/SectionTitle';
@@ -44,8 +44,8 @@ export function About() {
   const softSkills = [
     { key: 'codeReview', icon: FiCode },
     { key: 'architecture', icon: FiLayout },
-    { key: 'meetups', icon: FiMic },
-    { key: 'mentoring', icon: FiUsers },
+    { key: 'collaboration', icon: FiUsers },
+    { key: 'aiAssisted', icon: FiCpu },
     { key: 'optimization', icon: FiZap },
     { key: 'fromScratch', icon: FiPackage },
   ];

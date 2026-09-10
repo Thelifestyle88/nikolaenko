@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Nick Nikolaenko - Frontend Developer',
+  title: 'Nick Nikolaenko - Senior Frontend Engineer',
   description:
-    'Portfolio of Nick Nikolaenko - Frontend Developer specializing in React, TypeScript, and real-time systems',
+    'Portfolio of Nick Nikolaenko - Senior Frontend Engineer specializing in React, TypeScript, real-time systems, and performance optimization',
   icons: {
     icon: [
       { url: '/icons/favicon.svg', type: 'image/svg+xml' },

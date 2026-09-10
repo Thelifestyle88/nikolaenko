@@ -47,13 +47,64 @@ npm run dev
 
 Открыть [http://localhost:3000](http://localhost:3000).
 
-## Деплой на Vercel
+## Деплой на VPS (31.77.143.202)
 
-1. Запушить репозиторий на GitHub
-2. На [vercel.com](https://vercel.com) подключить репозиторий — Vercel определит Next.js автоматически
-3. При необходимости добавить свой домен в **Settings → Domains**
+### 1. Первичная настройка сервера (один раз)
 
-Каждый push в `main` запускает деплой. Pull Request'ы получают preview-URL.
+Подключиться по SSH:
+
+```bash
+ssh root@31.77.143.202
+```
+
+На сервере:
+
+```bash
+git clone https://github.com/Thelifestyle88/nikolaenko.git /var/www/mysite
+cd /var/www/mysite
+bash deploy/server-setup.sh
+```
+
+### 2. DNS
+
+В reg.ru для домена `nikolainikolaenkodev.ru`:
+
+| Тип | Имя | Значение |
+|-----|-----|----------|
+| A | `@` | `31.77.143.202` |
+| A | `www` | `31.77.143.202` |
+
+### 3. Бесплатный SSL (Let's Encrypt)
+
+```bash
+apt install -y certbot python3-certbot-nginx
+certbot --nginx -d nikolainikolaenkodev.ru -d www.nikolainikolaenkodev.ru
+```
+
+### 4. Автодеплой при push в `main`
+
+В GitHub → **Settings → Secrets and variables → Actions** добавить:
+
+| Secret | Значение |
+|--------|----------|
+| `SERVER_HOST` | `31.77.143.202` |
+| `SERVER_USER` | `root` (или ваш пользователь) |
+| `SERVER_SSH_KEY` | приватный SSH-ключ |
+
+Workflow: `.github/workflows/deploy.yml` — при каждом push в `main` запускает `scripts/deploy.sh` на сервере.
+
+Ручной деплой на сервере:
+
+```bash
+cd /var/www/mysite && bash scripts/deploy.sh
+```
+
+### Файлы деплоя
+
+- `scripts/deploy.sh` — pull, build, pm2 restart
+- `deploy/nginx.conf` — конфиг nginx
+- `deploy/server-setup.sh` — первичная установка
+- `.github/workflows/deploy.yml` — CI/CD
 
 ## Структура проекта
 
