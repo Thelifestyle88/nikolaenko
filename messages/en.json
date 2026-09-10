@@ -9,7 +9,7 @@
     "greeting": "Hi, I'm",
     "name": "Nick Nikolaenko",
     "role": "Senior Frontend Engineer",
-    "description": "Frontend Engineer specializing in React, TypeScript, real-time systems, and performance-intensive operational interfaces.",
+    "description": "4+ years in frontend development. Designed architecture for two production tolling systems built from scratch. React, TypeScript, real-time systems, and performance optimization.",
     "viewProjects": "View Projects",
     "downloadResume": "Download Resume"
   },
@@ -27,7 +27,8 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Commercial Projects",
+    "subtitle": "Commercial & R&D Projects",
+    "personalProject": "Personal R&D",
     "team": "Team: {count} people",
     "builtFromScratch": "Built from scratch",
     "screenshots": "Screenshots",
@@ -35,15 +36,15 @@
       "title": "Toll Booth Dispatcher Workstation",
       "company": "PUSK LLC",
       "location": "Eastern Exit from Ufa to M-5 \"Ural\" Highway",
-      "description": "Dispatcher workstation for toll booth operations. Real-time equipment monitoring (barriers, traffic lights, cameras), managing promotions and toll pricing.",
-      "highlights": "REST API for initial state, WebSocket (StompJS) for real-time updates, form validation via React-Hook-Form"
+      "description": "Toll plaza operations console built as the sole frontend developer. Real-time monitoring of barriers, traffic signals, cameras, promotions, and toll pricing.",
+      "highlights": "REST snapshots + StompJS real-time events. Connection monitoring, auto-recovery, and resync. Up to 8 concurrent MJPEG camera streams."
     },
     "project2": {
       "title": "Contactless Toll Point Dispatcher Workstation",
       "company": "PUSK LLC",
       "location": "Vitebskaya Junction of Western High-Speed Diameter",
-      "description": "Monitoring system for contactless toll points. Real-time passage display, transaction merging with camera photos and transponder data.",
-      "highlights": "WebSocket via Socket.io for real-time passages, transaction merging via REST API"
+      "description": "Contactless tolling console. Real-time passage display and transaction matching that combines camera photos with transponder data.",
+      "highlights": "Architected the app foundation. Socket.io for live passages, drag-and-drop transaction matching, REST API integration."
     },
     "project3": {
       "title": "ATMS Dispatcher Workstation",
@@ -59,6 +60,13 @@
       "location": "bugbounty.ru",
       "description": "Landing page on Next.js and admin panel for bug hunters and companies. Full development cycle: desktop and mobile versions, error handling, modals, Markdown support.",
       "highlights": "Next.js + TypeScript (landing), React + Redux Toolkit (admin panel), React Hook Form, safe Markdown rendering, component optimization with useMemo/memo/useCallback"
+    },
+    "project5": {
+      "title": "Smart Household — AI Family Planning Assistant",
+      "company": "Personal R&D",
+      "location": "Remote",
+      "description": "Mobile-first PWA for family tasks, calendars, offline workflows, and AI-generated plans. TypeScript monorepo with user app, admin panel, API, and background worker.",
+      "highlights": "React, RTK Query, React Hook Form, Zod, IndexedDB, PWA. AI provider abstraction with OpenAI-compatible API. Cursor Agents, GitHub/Figma MCP, automation scripts."
     }
   },
   "experience": {
@@ -66,28 +74,40 @@
     "jobs": [
       {
         "company": "PUSK LLC",
-        "role": "Frontend Developer",
-        "period": "Feb 2023 — Present",
-        "description": "Expert company providing consulting services at all stages of construction projects — from concept to commissioning. Also develops software for toll road operations.",
+        "role": "Frontend Developer · Infrastructure and Toll Road Software",
+        "period": "February 2023 — Present · Moscow",
+        "description": "Expert company providing consulting across construction project lifecycle and developing software for toll road operations.",
         "achievements": [
-          "Selected the frontend stack and designed architecture for two production apps built from scratch",
-          "Built a toll plaza console as the sole frontend developer on the project",
-          "Real-time data handling via WebSocket (StompJS, Socket.io)",
-          "Reduced LCP by 55% and INP by 57% through Canvas optimization",
-          "Conduct code reviews and collaborate with backend, embedded, ML, and QA teams"
+          "Selected the frontend stack and designed architecture for two production dispatcher applications built from scratch",
+          "Built a toll plaza console as the sole frontend developer: REST snapshots, StompJS real-time events, connection recovery, and up to 8 MJPEG streams",
+          "Architected and developed a contactless tolling console with Socket.IO and drag-and-drop transaction matching",
+          "Reduced LCP by 55% (~4.4s → 2.0s) and INP by 57% (~470ms → 200ms) on a Canvas-based traffic management interface",
+          "Conduct code reviews and collaborate with backend, embedded, ML, QA, and analytics teams on API contracts and technical decisions"
         ]
       },
       {
         "company": "BugBounty.ru",
-        "role": "Frontend Developer",
-        "period": "August 2024 — October 2025 (1 year 3 months)",
-        "description": "Vulnerability discovery platform — connecting companies and bug hunters to improve cybersecurity.",
+        "role": "Frontend Developer · Part-time Contract",
+        "period": "August 2024 — October 2025 · Remote",
+        "description": "Vulnerability discovery platform connecting companies and bug hunters to improve cybersecurity.",
         "achievements": [
           "Developed a responsive marketing website with Next.js and TypeScript",
           "Built administration interfaces for company and bug hunter accounts",
-          "Integrated REST APIs with forms, validation, and error handling",
+          "Integrated REST APIs with forms, validation, error handling, and responsive user flows",
           "Implemented safe rendering of user-generated Markdown content",
           "Optimized React components to reduce unnecessary renders"
+        ]
+      },
+      {
+        "company": "Personal R&D",
+        "role": "Fullstack Developer",
+        "period": "December 2021 — Present · Moscow",
+        "description": "Pet projects and technical experiments focused on fullstack product development and AI-assisted engineering workflows.",
+        "achievements": [
+          "Building Smart Household — a mobile-first PWA for family tasks, calendars, offline workflows, and AI-generated plans",
+          "Designed a TypeScript monorepo with user app, admin panel, API, and background worker",
+          "Implemented offline scenarios, data sync, conflict handling, RTK Query, React Hook Form, Zod, and IndexedDB",
+          "Use Cursor Agents, GitHub/Figma MCP integrations, and custom automation scripts with manual validation of all changes"
         ]
       }
     ]

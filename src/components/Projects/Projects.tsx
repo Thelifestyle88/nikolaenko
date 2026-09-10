@@ -14,6 +14,7 @@ type ProjectData = {
   teamSize?: number;
   fromScratch: boolean;
   hasAchievement: boolean;
+  isPersonal?: boolean;
   techStack: string[];
   screenshots?: string[];
 };
@@ -85,6 +86,25 @@ const projects: ProjectData[] = [
       '/images/bugbounty/bb1.jpg',
       '/images/bugbounty/bb2.jpg',
       '/images/bugbounty/bb3.jpg',
+    ],
+  },
+  {
+    key: 'project5',
+    fromScratch: true,
+    hasAchievement: false,
+    isPersonal: true,
+    techStack: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'Redux Toolkit',
+      'RTK Query',
+      'React Hook Form',
+      'Zod',
+      'IndexedDB',
+      'PWA',
+      'NestJS',
+      'PostgreSQL',
     ],
   },
 ];
@@ -254,6 +274,12 @@ export function Projects() {
                 <div className={styles.metaItem}>
                   <FiUsers size={16} />
                   <span>{t('team', { count: project.teamSize })}</span>
+                </div>
+              )}
+              {project.isPersonal && (
+                <div className={`${styles.metaItem} ${styles.metaAccent}`}>
+                  <FiCode size={16} />
+                  <span>{t('personalProject')}</span>
                 </div>
               )}
               {project.fromScratch && (
