@@ -5,6 +5,7 @@ import { FiMail, FiSend, FiGithub, FiLinkedin, FiDownload } from 'react-icons/fi
 import { Section } from '@/components/ui/Section';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Button } from '@/components/ui/Button';
+import { getResumePath } from '@/constants/resume';
 import styles from './Contacts.module.css';
 
 const contactLinks = [
@@ -37,10 +38,7 @@ const contactLinks = [
 export function Contacts() {
   const t = useTranslations('contacts');
   const locale = useLocale();
-  const resumeFile =
-    locale === 'en'
-      ? '/Nick_Nikolaenko_Frontend_Developer_CV_updated.docx'
-      : '/resume-ru.pdf';
+  const resumeFile = getResumePath(locale);
 
   return (
     <Section id="contacts">

@@ -32,8 +32,8 @@
 |-----|-----|
 | Тексты RU/EN | `messages/ru.json`, `messages/en.json` |
 | Контакты | `src/components/Contacts/Contacts.tsx`, `src/components/Footer/Footer.tsx` |
-| Резюме EN | `public/Nick_Nikolaenko_Frontend_Developer_CV_updated.docx` |
-| Резюме RU | `public/resume-ru.pdf` |
+| Резюме EN | `public/Nick_Nikolaenko_Frontend_Developer_CV_main.docx` |
+| Резюме RU | `public/resume_ru.pdf` |
 | Логотип в header | `public/images/nick_logo_only_transparent.svg` |
 | Favicon / PWA-иконки | `public/icons/` (из пака `public/nick_logo_site_icons/`) |
 | Фото, скриншоты проектов | `public/images/` |

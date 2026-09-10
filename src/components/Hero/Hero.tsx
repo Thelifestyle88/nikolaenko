@@ -6,15 +6,13 @@ import Image from 'next/image';
 import { FiArrowDown, FiDownload } from 'react-icons/fi';
 import { Button } from '@/components/ui/Button';
 import { Typewriter } from '@/components/ui/Typewriter';
+import { getResumePath } from '@/constants/resume';
 import styles from './Hero.module.css';
 
 export function Hero() {
   const t = useTranslations('hero');
   const locale = useLocale();
-  const resumeFile =
-    locale === 'en'
-      ? '/Nick_Nikolaenko_Frontend_Developer_CV_updated.docx'
-      : '/resume-ru.pdf';
+  const resumeFile = getResumePath(locale);
   const [greetingDone, setGreetingDone] = useState(false);
   const [nameDone, setNameDone] = useState(false);
   const [roleDone, setRoleDone] = useState(false);
