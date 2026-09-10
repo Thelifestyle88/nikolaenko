@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 24vw + 80px, 350px), 1fr));
   gap: var(--space-gap-md);
+  align-items: stretch;
 }
 
 .card {
@@ -11,6 +12,7 @@
   padding: clamp(20px, 2.5vw + 4px, 32px);
   display: flex;
   flex-direction: column;
+  height: 100%;
   gap: clamp(14px, 1.5vw + 4px, 20px);
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   position: relative;
@@ -53,6 +55,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 5.5rem;
 }
 
 .cardTitle {
@@ -89,6 +92,7 @@
   font-size: var(--fs-small);
   color: var(--text-secondary);
   line-height: 1.6;
+  min-height: 6.4em;
 }
 
 /* ===== Screenshots ===== */
@@ -96,6 +100,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 7.25rem;
 }
 
 .screenshotsLabel {
@@ -137,6 +142,24 @@
   display: block;
 }
 
+.screenshotPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: clamp(50px, 6vw + 20px, 80px);
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 4px;
+  opacity: 0.65;
+}
+
 /* ===== Highlights ===== */
 .highlights {
   display: flex;
@@ -145,6 +168,7 @@
   background: var(--accent-light);
   border-radius: var(--radius-sm);
   align-items: flex-start;
+  min-height: 5.5rem;
 }
 
 .highlightIcon {
@@ -163,6 +187,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  align-content: flex-start;
+  min-height: 4.75rem;
 }
 
 .techBadge {
@@ -183,6 +209,8 @@
   padding-top: var(--space-gap-sm);
   border-top: 1px solid var(--border);
   margin-top: auto;
+  min-height: 2.5rem;
+  align-items: center;
 }
 
 .metaItem {

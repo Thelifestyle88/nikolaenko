@@ -32,6 +32,7 @@
     "team": "Команда: {count} человек",
     "builtFromScratch": "Разработано с нуля",
     "screenshots": "Скриншоты",
+    "noScreenshots": "Нет превью",
     "project1": {
       "title": "АРМ диспетчера пропускного пункта",
       "company": "ООО «ПУСК»",

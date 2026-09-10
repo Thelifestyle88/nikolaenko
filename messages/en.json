@@ -32,6 +32,7 @@
     "team": "Team: {count} people",
     "builtFromScratch": "Built from scratch",
     "screenshots": "Screenshots",
+    "noScreenshots": "No preview",
     "project1": {
       "title": "Toll Booth Dispatcher Workstation",
       "company": "PUSK LLC",

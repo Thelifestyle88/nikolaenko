@@ -19,6 +19,8 @@ type ProjectData = {
   screenshots?: string[];
 };
 
+const SCREENSHOT_SLOTS = 3;
+
 const projects: ProjectData[] = [
   {
     key: 'project1',
@@ -227,32 +229,47 @@ export function Projects() {
               {t(`${project.key}.description`)}
             </p>
 
-            {project.screenshots && project.screenshots.length > 0 && (
-              <div className={styles.screenshotsSection}>
-                <p className={styles.screenshotsLabel}>
-                  <FiImage size={14} />
-                  {t('screenshots')}
-                </p>
-                <div className={styles.screenshotsGrid}>
-                  {project.screenshots.map((src, i) => (
-                    <button
-                      key={src}
-                      className={styles.screenshotThumb}
-                      onClick={() => openLightbox(project.screenshots!, i)}
-                      aria-label={`Screenshot ${i + 1}`}
+            <div className={styles.screenshotsSection}>
+              <p className={styles.screenshotsLabel}>
+                <FiImage size={14} />
+                {t('screenshots')}
+              </p>
+              <div className={styles.screenshotsGrid}>
+                {Array.from({ length: SCREENSHOT_SLOTS }, (_, i) => {
+                  const src = project.screenshots?.[i];
+
+                  if (src) {
+                    return (
+                      <button
+                        key={src}
+                        className={styles.screenshotThumb}
+                        onClick={() => openLightbox(project.screenshots!, i)}
+                        aria-label={`Screenshot ${i + 1}`}
+                      >
+                        <Image
+                          src={src}
+                          alt={`${t(`${project.key}.title`)} screenshot ${i + 1}`}
+                          width={200}
+                          height={120}
+                          className={styles.screenshotImg}
+                        />
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <div
+                      key={`placeholder-${project.key}-${i}`}
+                      className={styles.screenshotPlaceholder}
+                      aria-label={t('noScreenshots')}
                     >
-                      <Image
-                        src={src}
-                        alt={`${t(`${project.key}.title`)} screenshot ${i + 1}`}
-                        width={200}
-                        height={120}
-                        className={styles.screenshotImg}
-                      />
-                    </button>
-                  ))}
-                </div>
+                      <FiImage size={18} />
+                      <span>{t('noScreenshots')}</span>
+                    </div>
+                  );
+                })}
               </div>
-            )}
+            </div>
 
             <div className={styles.highlights}>
               <FiCode className={styles.highlightIcon} />
