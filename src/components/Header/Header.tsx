@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { usePathname, useRouter } from 'next/navigation';
 import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
+import { siteConfig } from '@/config/site';
 import styles from './Header.module.css';
 
 const navLinks = [
@@ -75,7 +76,11 @@ export function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <a href={`/${currentLocale}`} className={styles.logo} aria-label="Nick Nikolaenko">
+        <a
+          href={`/${currentLocale}`}
+          className={styles.logo}
+          aria-label={siteConfig.name[currentLocale as 'ru' | 'en']}
+        >
           <img
             src="/images/nick_logo_only_transparent.svg"
             alt=""

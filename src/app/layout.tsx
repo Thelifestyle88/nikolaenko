@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from 'next';
+import { siteConfig } from '@/config/site';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Nick Nikolaenko - Senior Frontend Engineer',
-  description:
-    'Portfolio of Nick Nikolaenko - Senior Frontend Engineer specializing in React, TypeScript, real-time systems, and performance optimization',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name.ru} — ${siteConfig.role.ru}`,
+    template: `%s | ${siteConfig.name.ru}`,
+  },
+  applicationName: siteConfig.name.ru,
   icons: {
     icon: [
       { url: '/icons/favicon.svg', type: 'image/svg+xml' },

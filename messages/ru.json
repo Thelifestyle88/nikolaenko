@@ -7,7 +7,7 @@
   },
   "hero": {
     "greeting": "Привет, я",
-    "name": "Николай Николаенко",
+    "name": "Николаенко Николай",
     "role": "Senior Frontend-разработчик",
     "description": "4+ года во frontend-разработке. Спроектировал архитектуру двух production-систем для платных дорог с нуля. React, TypeScript, real-time и оптимизация производительности.",
     "viewProjects": "Смотреть проекты",
@@ -123,7 +123,7 @@
     "downloadResume": "Скачать резюме (PDF)"
   },
   "footer": {
-    "copyright": "© {year} Все права защищены",
+    "copyright": "© {year} Николаенко Николай. Все права защищены",
     "builtWith": "Сделано с помощью Next.js и TypeScript"
   }
 }
