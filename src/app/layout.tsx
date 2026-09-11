@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/icons/site.webmanifest',
+  verification: {
+    yandex: '52335a2462b7410c',
+  },
   other: {
     'msapplication-config': '/icons/browserconfig.xml',
     'msapplication-TileColor': '#020817',
