@@ -16,6 +16,7 @@
   "about": {
     "title": "About Me",
     "description": "Frontend engineer with experience building complex dispatcher systems and enterprise interfaces from scratch. Working with real-time data, Canvas performance optimization, and architectural decisions.",
+    "careerBackground": "Before moving into software development, I worked on the construction of two major petrochemical complexes. I led a team of three, coordinated specialists across disciplines, and was responsible for equipment deliveries on the critical path that affected key construction milestones. This experience helps me identify risks early and see tasks through to completion across teams.",
     "techStack": "Tech Stack",
     "softSkills": "Skills & Practices",
     "codeReview": "Code Review",
@@ -109,6 +110,29 @@
           "Designed a TypeScript monorepo with user app, admin panel, API, and background worker",
           "Implemented offline scenarios, data sync, conflict handling, RTK Query, React Hook Form, Zod, and IndexedDB",
           "Use Cursor Agents, GitHub/Figma MCP integrations, and custom automation scripts with manual validation of all changes"
+        ]
+      },
+      {
+        "company": "SIBUR Group",
+        "role": "Critical Path Equipment Delivery Manager",
+        "period": "June 2016 — June 2022",
+        "description": "Before software development: ZapSibNeftekhim and Amur Gas Chemical Complex projects. Career progression: Logistics Expert → Chief Procurement Expert → Equipment Delivery Manager (from July 2020).",
+        "achievements": [
+          "As a manager, led a team of three: assigned tasks, set priorities, and monitored completion",
+          "Was responsible for critical path equipment deliveries for the Amur Gas Chemical Complex, affecting key construction milestones",
+          "Coordinated engineering, procurement, suppliers, and construction contractors to resolve manufacturing and delivery delays",
+          "Organized equipment quality control, resolution of nonconformities, and reporting on schedules and risks"
+        ]
+      },
+      {
+        "company": "Gazprom Transgaz Moscow",
+        "role": "Lead Instrumentation and Automation Engineer",
+        "period": "February 2011 — June 2016",
+        "description": "Industrial automation. Career progression: Instrument Technician → Engineer → Lead Engineer (from February 2013).",
+        "achievements": [
+          "Was responsible for the operation and reliability of industrial automation systems",
+          "Supervised personnel and coordinated contractors during equipment maintenance and repairs",
+          "Contributed to the introduction of measurement and control equipment, evaluation of engineering designs, and technical documentation"
         ]
       }
     ]

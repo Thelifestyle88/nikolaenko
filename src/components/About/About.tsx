@@ -54,7 +54,10 @@ export function About() {
     <Section id="about" alternate>
       <SectionTitle title={t('title')} />
 
-      <p className={styles.description}>{t('description')}</p>
+      <div className={styles.description}>
+        <p>{t('description')}</p>
+        <p>{t('careerBackground')}</p>
+      </div>
 
       <h3 className={styles.subtitle}>{t('techStack')}</h3>
       <div className={styles.techGrid}>
